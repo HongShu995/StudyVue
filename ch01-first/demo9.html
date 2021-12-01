@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+    <todo>
+        <todo-title slot="todo-title" :biao="biaoti"></todo-title>
+        <todo-items slot="todo-items" v-for="(dian,index) in todoItems"
+                    :dian="dian" :index="index" v-on:shanchu="removeItems(index)"></todo-items>
+    </todo>
+
+
+    <hs>
+        <h1>点击</h1>
+    </hs>
+</div>
+
+
+
+<!--导入vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+    //slot:插槽
+    Vue.component("todo",{
+        template: '<div>\
+            <slot name="todo-title"></slot>\
+                <ul>\
+                    <slot name="todo-items"></slot>\
+                </ul>\
+            </div>'
+    })
+
+    Vue.component("todo-title",{
+        props: ['biao'],
+        template: '<div>{{biao}}</div>'
+    })
+    Vue.component("todo-items",{
+        props: ['dian','index'],
+        template: '<li>{{index}}------{{dian}} <button @click="remove">删除</button></li>',
+        methods: {
+            remove: function (index){
+                //自定义事件分发
+                this.$emit('shanchu',index);
+            }
+        }
+    })
+
+    Vue.component("hs",{
+        template: '<div>\
+        <a href="#">\
+        <slot></slot>\
+        </a>\
+        </div>'
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            biaoti: "语言列表",
+            todoItems: ['JAVA','C++','Linux']
+        },
+        methods: {
+            removeItems: function (index) {
+                console.log("删除了"+this.todoItems[index]);
+               this.todoItems.splice(index,1);
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

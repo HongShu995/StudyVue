@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--解决闪烁问题-->
+<style>
+    [v-clock]{
+        display: none;
+    }
+</style>
+
+<div id="app" v-clock>
+    <p> currentTime1():   {{currentTime1()}}</p>
+    <p> currentTime1:   {{currentTime1}}</p>
+    <!--<p> currentTime2():   {{currentTime2()}}</p>-->
+    <p> currentTime2:   {{currentTime2}}</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--导入vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello"
+        },
+        methods: {
+            currentTime1: function () {
+                return Date.now();//返回一个时间戳
+            }
+        },
+        computed: { //计算属性
+            currentTime2: function () {
+                return Date.now();//返回一个时间戳
+            }
+        }
+
+    })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--vue层 模板-->
+<div id="app">
+    <mycomponent v-for="item in items" v-bind:a="item"></mycomponent>
+</div>
+
+
+
+
+
+
+
+
+
+<!--导入vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+
+<script>
+    //定义一个vue组件
+    Vue.component("mycomponent",{
+        props: ['a'],
+        template: '<li>{{a}}</li>',
+    });
+
+    var vm = new Vue({
+        el: "#app",
+        //model ： 数据
+        data:
+            {
+                items: ["Java","C++","C#"]
+            }
+    })
+</script>
+
+</body>
+</html>
